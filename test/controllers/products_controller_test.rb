@@ -4,7 +4,7 @@ class ProductsControllerTest < ActionDispatch::IntegrationTest
   setup do
     @product = products(:one)
     @valid_product = {
-      title: 'Test Product',
+      title: 'Test Product long title',
       description: 'Test product\'s description goes here',
       image_url: 'test-product.jpg',
       price: 19.95
