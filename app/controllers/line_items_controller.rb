@@ -28,7 +28,7 @@ class LineItemsController < ApplicationController
   def create
     session[:store_index_visit_counter] = 1 unless session[:store_index_visit_counter].nil?
     product = Product.find(params[:product_id])
-    @line_item = @cart.line_items.build(product: product)
+    @line_item = @cart.add_product(product)
 
     respond_to do |format|
       if @line_item.save
