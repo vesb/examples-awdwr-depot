@@ -30,6 +30,11 @@
       </div>
     </div>
     <div id="footer">
+      <% if session[:store_index_visit_counter] > 5 %>
+        <span class="fleft">
+          You have <%= pluralize(session[:store_index_visit_counter], 'visit') %>
+        </span>
+      <% end %>
       <span><%= time_tag(Time.now) %></span>
     </div>
   </body>
