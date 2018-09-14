@@ -3,6 +3,9 @@ class LineItemsController < ApplicationController
   before_action :set_cart, only: [:create]
   before_action :set_line_item, only: [:show, :edit, :update, :destroy]
 
+  rescue_from ActiveRecord::RecordNotFound, with: :invalid_item
+  rescue_from NoMethodError, with: :invalid_method
+
   # GET /line_items
   # GET /line_items.json
   def index
@@ -58,9 +61,10 @@ class LineItemsController < ApplicationController
   # DELETE /line_items/1
   # DELETE /line_items/1.json
   def destroy
-    @line_item.destroy
+    @line_item.destroy if @line_item.cart_id == session[:cart_id]
+    redirect_path = @line_item.cart.line_items.count > 0 ? @line_item.cart : store_index_url
     respond_to do |format|
-      format.html { redirect_to line_items_url }
+      format.html { redirect_to redirect_path, notice: "Product '#{@line_item.product.title}' was removed." }
       format.json { head :no_content }
     end
   end
@@ -74,5 +78,15 @@ class LineItemsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def line_item_params
       params.require(:line_item).permit(:product_id)
+    end
+
+    def invalid_item
+      logger.error "Attempt to access invalid item #{params[:id]}"
+      redirect_to store_index_url, notice: 'Invalid item'
+    end
+
+    def invalid_method
+      logger.error "Attempt to access invalid method"
+      redirect_to store_index_url, notice: 'Invalid method'
     end
 end

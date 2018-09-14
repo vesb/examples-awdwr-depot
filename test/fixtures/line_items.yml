@@ -1,9 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
+one_in_cart_one:
+  product: one
+  cart: one
+
+two_in_cart_one:
   product: two
   cart: one
 
-two:
-  product: two
+one_in_cart_two:
+  product: one
   cart: two
