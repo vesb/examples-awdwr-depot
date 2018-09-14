@@ -51,4 +51,13 @@ class ProductsControllerTest < ActionDispatch::IntegrationTest
 
     assert_redirected_to products_url
   end
+
+  test 'should desplay product layout' do
+    get product_url(@product)
+    assert_response :success
+
+    assert_select '#columns #main p:nth-child(2) strong', 'Title:'
+    assert_select '#columns #main p:nth-child(5) strong', 'Price:'
+    assert_select '#columns #main p:nth-child(5)', /\$\s\d+\.\d+/
+  end
 end
