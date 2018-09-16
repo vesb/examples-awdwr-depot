@@ -3,6 +3,7 @@ require 'test_helper'
 class ProductsControllerTest < ActionDispatch::IntegrationTest
   setup do
     @product = products(:one)
+    @product_not_in_cart = products(:not_in_cart)
     @valid_product = {
       title: 'Test Product long title',
       description: 'Test product\'s description goes here',
@@ -52,8 +53,16 @@ class ProductsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to products_url
   end
 
-  test "should destroy product" do
+  test "should destroy product not in cart" do
     assert_difference('Product.count', -1) do
+      delete product_url(@product_not_in_cart)
+    end
+
+    assert_redirected_to products_url
+  end
+
+  test "should not destroy product in cart" do
+    assert_difference('Product.count', 0) do
       delete product_url(@product)
     end
 

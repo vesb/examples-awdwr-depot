@@ -3,11 +3,14 @@
 one_in_cart_one:
   product: one
   cart: one
+  price: 11.22
 
 two_in_cart_one:
   product: two
   cart: one
+  price: 33.44
 
 one_in_cart_two:
   product: one
   cart: two
+  price: 55.66

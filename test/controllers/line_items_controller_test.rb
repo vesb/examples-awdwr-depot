@@ -22,8 +22,8 @@ class LineItemsControllerTest < ActionDispatch::IntegrationTest
 
     follow_redirect!
 
-    assert_select '#main h2', 'Your Cart'
-    assert_select '#main table tr td:nth-child(2)', 'Programming Ruby 1.9'
+    assert_select '#side h2', 'Your Cart'
+    assert_select '#side table tr td:nth-child(2)', 'Programming Ruby 1.9'
   end
 
   test "should add unique line_items in cart" do
@@ -34,11 +34,11 @@ class LineItemsControllerTest < ActionDispatch::IntegrationTest
 
     follow_redirect!
 
-    assert_select '#main h2', 'Your Cart'
-    assert_select '#main table tr:nth-child(1) td:nth-child(1)', "1\u00D7"
-    assert_select '#main table tr:nth-child(1) td:nth-child(2)', products(:one).title
-    assert_select '#main table tr:nth-child(2) td:nth-child(1)', "1\u00D7"
-    assert_select '#main table tr:nth-child(2) td:nth-child(2)', products(:two).title
+    assert_select '#side h2', 'Your Cart'
+    assert_select '#side table tr:nth-child(1) td:nth-child(1)', "1\u00D7"
+    assert_select '#side table tr:nth-child(1) td:nth-child(2)', products(:one).title
+    assert_select '#side table tr:nth-child(2) td:nth-child(1)', "1\u00D7"
+    assert_select '#side table tr:nth-child(2) td:nth-child(2)', products(:two).title
   end
 
   test "should add duplicate line_items in cart" do
@@ -49,9 +49,9 @@ class LineItemsControllerTest < ActionDispatch::IntegrationTest
 
     follow_redirect!
 
-    assert_select '#main h2', 'Your Cart'
-    assert_select '#main table tr:nth-child(1) td:nth-child(1)', "2\u00D7"
-    assert_select '#main table tr:nth-child(1) td:nth-child(2)', products(:one).title
+    assert_select '#side h2', 'Your Cart'
+    assert_select '#side table tr:nth-child(1) td:nth-child(1)', "2\u00D7"
+    assert_select '#side table tr:nth-child(1) td:nth-child(2)', products(:one).title
   end
 
   test "should show line_item" do
