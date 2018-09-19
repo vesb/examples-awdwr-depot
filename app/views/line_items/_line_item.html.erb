@@ -7,6 +7,6 @@
   <span class="cell"><%= line_item.product.title %></span>
   <span class="cell item_price"><%= number_to_currency(line_item.total_price) %></span>
   <span class="cell">
-    <%= button_to 'X', line_item, method: :delete, data: { confirm: "Are you sure you want to remove '#{line_item.product.title}'?" } %>
+    <%= button_to 'X', line_item, method: :delete, data: { confirm: "Are you sure you want to remove '#{line_item.product.title}'?" }, remote: true %>
   </span>
 </div>

@@ -1,8 +1,8 @@
-if ($('#cart .row').length == 1) {
+$('#cart').html("<%=j render(@cart) %>");
+
+if ($('#cart .row').length == 2) {
   $('#cart').show('blind', 1000);
 }
-
-$('#cart').html("<%=j render(@cart) %>");
 
 $('#current_item').
   css({'background-color': '#88ff88'}).

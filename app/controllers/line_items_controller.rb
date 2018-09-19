@@ -66,6 +66,7 @@ class LineItemsController < ApplicationController
     redirect_path = @line_item.cart.line_items.count > 0 ? @line_item.cart : store_index_url
     respond_to do |format|
       format.html { redirect_to redirect_path, notice: "Product '#{@line_item.product.title}' was removed." }
+      format.js { @cart = @line_item.cart }
       format.json { head :no_content }
     end
   end
@@ -76,6 +77,7 @@ class LineItemsController < ApplicationController
     when 'inc'
       @line_item.increment(:quantity)
     when 'dec'
+      return destroy if @line_item.quantity < 2
       @line_item.decrement(:quantity)
     else
       raise "Invalid operation on line_item #{params[:type]}"
