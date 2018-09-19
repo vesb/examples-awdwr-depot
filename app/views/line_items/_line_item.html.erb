@@ -1,5 +1,7 @@
 <div <%= 'id=current_item' if line_item == @current_item %> class="row">
   <span class="cell">
+    <%= button_to "\u25B3", line_items_change_path(line_item), method: :patch, params: { type: :inc }, remote: true %>
+    <%= button_to "\u25BD", line_items_change_path(line_item), method: :patch, params: { type: :dec }, remote: true %>
     <%= line_item.quantity %>&times;
   </span>
   <span class="cell"><%= line_item.product.title %></span>

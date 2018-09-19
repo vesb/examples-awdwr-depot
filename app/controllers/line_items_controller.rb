@@ -1,7 +1,7 @@
 class LineItemsController < ApplicationController
   include CurrentCart
-  before_action :set_cart, only: [:create]
-  before_action :set_line_item, only: [:show, :edit, :update, :destroy]
+  before_action :set_cart, only: [:create, :change]
+  before_action :set_line_item, only: [:show, :edit, :update, :destroy, :change]
 
   rescue_from ActiveRecord::RecordNotFound, with: :invalid_item
   rescue_from NoMethodError, with: :invalid_method
@@ -12,8 +12,8 @@ class LineItemsController < ApplicationController
     @line_items = LineItem.all
   end
 
-  # GET /line_items/1
-  # GET /line_items/1.json
+  # GET /line_items/:id
+  # GET /line_items/:id.json
   def show
   end
 
@@ -22,7 +22,7 @@ class LineItemsController < ApplicationController
     @line_item = LineItem.new
   end
 
-  # GET /line_items/1/edit
+  # GET /line_items/:id/edit
   def edit
   end
 
@@ -45,8 +45,8 @@ class LineItemsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /line_items/1
-  # PATCH/PUT /line_items/1.json
+  # PATCH/PUT /line_items/:id
+  # PATCH/PUT /line_items/:id.json
   def update
     respond_to do |format|
       if @line_item.update(line_item_params)
@@ -59,14 +59,37 @@ class LineItemsController < ApplicationController
     end
   end
 
-  # DELETE /line_items/1
-  # DELETE /line_items/1.json
+  # DELETE /line_items/:id
+  # DELETE /line_items/:id.json
   def destroy
     @line_item.destroy if @line_item.cart_id == session[:cart_id]
     redirect_path = @line_item.cart.line_items.count > 0 ? @line_item.cart : store_index_url
     respond_to do |format|
       format.html { redirect_to redirect_path, notice: "Product '#{@line_item.product.title}' was removed." }
       format.json { head :no_content }
+    end
+  end
+
+  # PATCH /line_items/:id/change
+  def change
+    case params[:type]
+    when 'inc'
+      @line_item.increment(:quantity)
+    when 'dec'
+      @line_item.decrement(:quantity)
+    else
+      raise "Invalid operation on line_item #{params[:type]}"
+    end
+
+    respond_to do |format|
+      if @line_item.save
+        format.html { redirect_to store_index_url, notice: 'Line item quantity was successfully updated.' }
+        format.js { @current_item = @line_item }
+        format.json { render :show, status: :created, location: @line_item }
+      else
+        format.html { render :new }
+        format.json { render json: @line_item.errors, status: :unprocessable_entity }
+      end
     end
   end
 
