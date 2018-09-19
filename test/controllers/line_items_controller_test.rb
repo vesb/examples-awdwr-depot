@@ -23,7 +23,7 @@ class LineItemsControllerTest < ActionDispatch::IntegrationTest
     follow_redirect!
 
     assert_select '#side h2', 'Your Cart'
-    assert_select '#side table tr td:nth-child(2)', 'Programming Ruby 1.9'
+    assert_select '#side .table .row .cell:nth-child(2)', 'Programming Ruby 1.9'
   end
 
   test "should create line_item via ajax" do
@@ -33,7 +33,7 @@ class LineItemsControllerTest < ActionDispatch::IntegrationTest
 
     assert_response :success
     assert_select_jquery :html, '#cart' do
-      assert_select 'tr#current_item td', /Programming Ruby 1.9/
+      assert_select '.row#current_item .cell', /Programming Ruby 1.9/
     end
   end
 
@@ -46,10 +46,10 @@ class LineItemsControllerTest < ActionDispatch::IntegrationTest
     follow_redirect!
 
     assert_select '#side h2', 'Your Cart'
-    assert_select '#side table tr:nth-child(1) td:nth-child(1)', "1\u00D7"
-    assert_select '#side table tr:nth-child(1) td:nth-child(2)', products(:one).title
-    assert_select '#side table tr:nth-child(2) td:nth-child(1)', "1\u00D7"
-    assert_select '#side table tr:nth-child(2) td:nth-child(2)', products(:two).title
+    assert_select '#side .table .row:nth-child(1) .cell:nth-child(1)', "1\u00D7"
+    assert_select '#side .table .row:nth-child(1) .cell:nth-child(2)', products(:one).title
+    assert_select '#side .table .row:nth-child(2) .cell:nth-child(1)', "1\u00D7"
+    assert_select '#side .table .row:nth-child(2) .cell:nth-child(2)', products(:two).title
   end
 
   test "should add duplicate line_items in cart" do
@@ -61,8 +61,8 @@ class LineItemsControllerTest < ActionDispatch::IntegrationTest
     follow_redirect!
 
     assert_select '#side h2', 'Your Cart'
-    assert_select '#side table tr:nth-child(1) td:nth-child(1)', "2\u00D7"
-    assert_select '#side table tr:nth-child(1) td:nth-child(2)', products(:one).title
+    assert_select '#side .table .row:nth-child(1) .cell:nth-child(1)', "2\u00D7"
+    assert_select '#side .table .row:nth-child(1) .cell:nth-child(2)', products(:one).title
   end
 
   test "should show line_item" do
