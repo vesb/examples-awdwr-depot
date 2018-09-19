@@ -60,7 +60,6 @@ body, body > p, body > ol, body > ul, body > td { margin: 8px !important; }
   #side {
     padding: 1em 2em;
     background: #141;
-    min-width: 200px;
 
     form, div {
       display: inline;
@@ -126,4 +125,19 @@ body, body > p, body > ol, body > ul, body > td { margin: 8px !important; }
 
 .fleft {
   float: left;
+}
+.fright {
+  float: right;
+}
+
+.table, #columns #side div.table {
+  display: table;
+
+  .row {
+    display: table-row;
+  }
+
+  .cell {
+    display: table-cell;
+  }
 }
