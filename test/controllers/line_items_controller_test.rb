@@ -113,4 +113,32 @@ class LineItemsControllerTest < ActionDispatch::IntegrationTest
 
     assert_redirected_to @line_item.cart
   end
+
+  test "should increment line_item quantity in cart" do
+    post line_items_url, params: { product_id: products(:one).id }
+    @line_item = LineItem.find_by(cart_id: session[:cart_id], product_id: products(:one).id)
+
+    assert_difference('LineItem.find_by(id: @line_item.id).quantity', 1) do
+      patch line_items_change_url(@line_item), params: { id: @line_item.id, type: :inc }
+    end
+  end
+
+  test "should decrement line_item quantity in cart" do
+    post line_items_url, params: { product_id: products(:one).id }
+    @line_item = LineItem.find_by(cart_id: session[:cart_id], product_id: products(:one).id)
+    patch line_items_change_url(@line_item), params: { id: @line_item.id, type: :inc }
+
+    assert_difference('LineItem.find_by(id: @line_item.id).quantity', -1) do
+      patch line_items_change_url(@line_item), params: { id: @line_item.id, type: :dec }
+    end
+  end
+
+  test "should destroy line_item in cart with quantity 0 after decrement" do
+    post line_items_url, params: { product_id: products(:one).id }
+    @line_item = LineItem.find_by(cart_id: session[:cart_id], product_id: products(:one).id)
+
+    assert_difference('LineItem.count', -1) do
+      patch line_items_change_url(@line_item), params: { id: @line_item.id, type: :dec }
+    end
+  end
 end
