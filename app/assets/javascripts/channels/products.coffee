@@ -8,3 +8,7 @@ App.products = App.cable.subscriptions.create "ProductsChannel",
   received: (data) ->
     # Called when there's incoming data on the websocket for this channel
     $('.store #main').html(data.html)
+
+    $('#main .entry.changed').
+      css({'background-color': '#88ff88'}).
+      animate({'background-color': '#fff'}, 1000)
