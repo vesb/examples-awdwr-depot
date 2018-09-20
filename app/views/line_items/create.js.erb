@@ -1,6 +1,8 @@
+$('#notice').hide();
+
 $('#cart').html("<%=j render(@cart) %>");
 
-if ($('#cart .row').length == 2) {
+if ($('#cart .row').length == 3) {
   $('#cart').show('blind', 1000);
 }
 
