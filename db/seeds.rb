@@ -52,3 +52,12 @@ Product.create!(title: 'Ruby Performance Optimization',
       </p>},
   image_url: 'adrpo.jpg',
   price: 46.00)
+
+
+[
+  'Check',
+  'Credit card',
+  'Purchase order'
+].each do |payment_type|
+  PaymentType.create!(name: payment_type)
+end
