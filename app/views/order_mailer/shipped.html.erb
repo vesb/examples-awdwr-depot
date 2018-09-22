@@ -1,0 +1,13 @@
+<h3>Pragmatic Order Shipped</h3>
+<p>
+  This is just to let you know that we've shipped your recent order:
+</p>
+
+<div class="table">
+  <div class="row">
+    <span class="cell">Qty</span>
+    <span class="cell"></span>
+    <span class="cell">Description</span>
+  </div>
+  <%= render @order.line_items -%>
+</div>
