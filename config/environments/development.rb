@@ -60,5 +60,5 @@ Rails.application.configure do
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
   # CUSTOM configuration
-  config.action_mailer.delivery_methodf = :test
+  config.action_mailer.delivery_method = :test
 end

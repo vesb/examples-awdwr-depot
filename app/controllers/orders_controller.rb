@@ -1,7 +1,7 @@
 class OrdersController < ApplicationController
   include CurrentCart
   before_action :set_cart, only: [:new, :create]
-  before_action :ensure_cart_isnt_empty, only: :new
+  before_action :ensure_cart_is_not_empty, only: :new
   before_action :set_order, only: [:show, :edit, :update, :destroy]
 
   # GET /orders
@@ -79,7 +79,7 @@ class OrdersController < ApplicationController
       params.require(:order).permit(:name, :address, :email, :payment_type)
     end
 
-    def ensure_cart_isnt_empty
+    def ensure_cart_is_not_empty
       if @cart.line_items.empty?
         redirect_to store_index_url, notice: 'Your cart is empty'
       end
