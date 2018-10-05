@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :check_current_password, only: :update
 
   # GET /users
   # GET /users.json
@@ -80,5 +81,13 @@ class UsersController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
       params.require(:user).permit(:name, :password, :password_confirmation)
+    end
+
+    def check_current_password
+      if @user.id == session[:user_id]
+        unless @user.authenticate(params[:user][:current_password])
+          redirect_to edit_user_url(@user), notice: 'Invalid password'
+        end
+      end
     end
 end

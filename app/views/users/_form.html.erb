@@ -1,4 +1,5 @@
 <div class="depot_form">
+  <p id="notice"><%= notice %></p>
   <%= form_with(model: user, local: true) do |form| %>
     <% if user.errors.any? %>
       <div id="error_explanation">
@@ -20,6 +21,13 @@
         <%= form.label :name %>
         <%= form.text_field :name %>
       </div>
+
+      <% if user.id == session[:user_id] %>
+      <div class="field">
+        <%= form.label :current_password %>
+        <%= form.password_field :current_password %>
+      </div>
+      <% end %>
 
       <div class="field">
         <%= form.label :password %>
