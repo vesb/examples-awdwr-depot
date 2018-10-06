@@ -11,7 +11,7 @@ class User < ApplicationRecord
   def ensure_an_admin_remains
     if User.count.zero?
       # ActiveRecord::Rollback exception is not passed on in chain
-      raise Error.new 'Can not delete the last user'
+      raise Error.new 'Can not delete the last user.'
     end
   end
 end
