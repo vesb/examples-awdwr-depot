@@ -6,4 +6,10 @@ class AdminControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  test "should not get index if not logged in" do
+    logout
+
+    get admin_url
+    assert_redirected_to login_url
+  end
 end
