@@ -1,0 +1,34 @@
+bg:
+  time:
+    formats:
+      default: "%d.%m.%Y"
+      short: "%D"
+      long: "%d.%m.%Y"
+
+  number:
+    currency:
+      format:
+        unit: '$'
+        precision: 2
+        seperator: '.'
+        delimiter: ','
+        format: '%u%n'
+
+  layouts:
+    application:
+      title: 'Библиотека на прагматика'
+      home: 'Начало'
+      questions: 'Въпроси'
+      news: 'Новини'
+      contact: 'Контакт'
+
+  store:
+    index:
+      title_html: 'Твоят прагматичен каталог (can use &entites; with keys ending on _html)'
+      add_html: 'Добави в количка'
+
+  carts:
+    cart:
+      title: 'Твоята количка'
+      empty: 'Изчисти'
+      checkout: 'Продължи'

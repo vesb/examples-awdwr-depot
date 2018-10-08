@@ -1,4 +1,4 @@
-<h2>Your Cart</h2>
+<h2><%= t('.title') %></h2>
 
 <div class="table">
   <%= render(cart.line_items) %>
@@ -6,14 +6,14 @@
     <span class="cell"></span>
     <span class="cell">Total: </span>
     <span class="cell total_cell"><%= number_to_currency(cart.total_price) %></span>
-    <span class="cell"><%= button_to 'Empty', cart, method: :delete, data: { confirm: 'Are you sure?' }, remote: true %></span>
+    <span class="cell"><%= button_to t('.empty'), cart, method: :delete, data: { confirm: 'Are you sure?' }, remote: true %></span>
   </div>
 
   <div class="row">
     <span class="cell"></span>
     <span class="cell"></span>
     <span class="cell checkout">
-      <%= button_to 'Checkout',
+      <%= button_to t('.checkout'),
                     new_order_path,
                     method: :get,
                     disabled: (controller.controller_name == 'orders' &&
