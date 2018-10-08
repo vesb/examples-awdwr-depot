@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  before_action :set_i18n_locale_from_params
   before_action :authorize
 
   protected
@@ -19,6 +20,17 @@ class ApplicationController < ActionController::Base
         format.json { render json: 'Not authorized', status: 401 }
         format.atom { render json: 'Not authorized', status: 401 }
         return unless request.format.html?
+      end
+    end
+  end
+
+  def set_i18n_locale_from_params
+    if params[:locale]
+      if I18n.available_locales.map(&:to_s).include?(params[:locale])
+        I18n.locale = params[:locale]
+      else
+        flash.now[:notice] = "#{params[:locale]} translation not available"
+        logger.error flash.now[:notice]
       end
     end
   end
