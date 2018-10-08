@@ -14,7 +14,7 @@
     <span class="cell"></span>
     <span class="cell checkout">
       <%= button_to t('.checkout'),
-                    new_order_path,
+                    new_order_path(locale: I18n.locale),
                     method: :get,
                     disabled: (controller.controller_name == 'orders' &&
                                 controller.action_name == 'new')

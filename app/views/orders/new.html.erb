@@ -2,9 +2,9 @@
 <div class="depot_form">
   <fieldset>
     <legend>
-      Please Enter Your Details
+      <%= t('.legend') %>
     </legend>
-    <%= render 'form', order: @order %>
+    <%= render 'form', order: @order, locale: I18n.locale %>
   </fieldset>
 </div>
 

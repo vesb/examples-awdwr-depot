@@ -14,6 +14,22 @@ bg:
         delimiter: ','
         format: '%u%n'
 
+  activerecord:
+    models:
+      order: 'поръчка'
+    errors:
+      messages:
+        inclusion: 'не се съдържа в списъка'
+        blank: 'не може да е празно'
+  errors:
+    template:
+      body: 'Възникнаха следните грешки'
+      header:
+        one: '1 грешка при опит да запазите текущата %{model}'
+        other: "%{count} грешки при опит да запазите текущата %{model}"
+
+  thanks: 'Благодарим за Вашата поръчка.'
+
   layouts:
     application:
       title: 'Библиотека на прагматика'
@@ -32,3 +48,14 @@ bg:
       title: 'Твоята количка'
       empty: 'Изчисти'
       checkout: 'Продължи'
+
+  orders:
+    new:
+      legend: 'Моля попълнете вашите детайли'
+    form:
+      name: 'Име'
+      address_html: 'Адрес'
+      email: 'E-mail'
+      payment_type: 'Платежен метод'
+      payment_prompt_html: 'Изберете платежен метод'
+      submit: 'Поръчай'
